@@ -10,7 +10,7 @@ def bubble_sort (array)
 end
 
 
-puts bubble_sort([4,3,78,2,0,2]).inspect
+p bubble_sort([4,3,78,2,0,2])
 # => [0, 2, 2, 3, 4, 78]
 
 def bubble_sort_by (array)
