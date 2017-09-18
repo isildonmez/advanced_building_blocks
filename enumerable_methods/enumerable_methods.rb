@@ -24,9 +24,9 @@ module Enumerable
 	def my_select
 		if block_given?
 			result = []
-			for i  in [0...self.size]
-				if yield(self[i]) == true
-					result.push(self[i])
+			self.my_each do|n|
+				if yield(n) == true
+					result.push(n)
 				end
 			end
 			result
@@ -37,18 +37,10 @@ module Enumerable
 
 	def my_all?
 		if block_given?
-			for i  in [0...self.size]
-				if yield(self[i]) == false
-					return false
-				end
-			end
+			self.my_each {|n| return false if yield(n) == false}
 			return true
 		else
-			for i  in [0...self.size]
-				if self[i] == nil || false
-					return false
-				end
-			end
+			self.my_each {|n| return false if n == nil || false}
 			return true
 		end
 	end
@@ -57,21 +49,13 @@ module Enumerable
 
   	def my_any?
     	if block_given?
-      		for i  in [0...self.size]
-        		if yield(self[i]) == true
-          			return true
-        		end
-      		end
+    		self.my_each {|n| return true if yield(n) == true}
       		return false
     	else
       		if self.size == 0
         		return false
       		else
-        		for i  in [0...self.size]
-          			if self[i] != nil || false
-            			return true
-          			end
-        		end
+      			self.my_each {|n| return true if n != nil || false}
         		return false
       		end
     	end
@@ -81,21 +65,13 @@ module Enumerable
 
 	def my_none?
     	if block_given?
-      		for i  in [0...self.size]
-        		if yield(self[i]) == true
-          			return false
-        		end
-      		end
+    		self.my_each {|n| return false if yield(n) == true}
       		return true
     	else
       		if self.size == 0
         		return true
       		else
-        		for i  in [0...self.size]
-          			if self[i] != nil || false
-            			return false
-          			end
-        		end
+      			self.my_each {|n| return false if n != nil || false}
         		return true
       		end
     	end
@@ -110,21 +86,13 @@ module Enumerable
 	def my_count(*args)
 		counting = 0
 		if block_given?
-      		for i  in [0...self.size]
-        		if yield(self[i]) == true
-          			counting += 1
-        		end
-      		end
+			self.my_each {|n| counting += 1 if yield(n) == true}
     	else
     		if args.empty?
       			counting = self.size
       		else
       			target = args[0]
-	      		for i  in [0...self.size]
-	        		if self[i] == target
-	          			counting += 1
-	        		end
-	      		end
+      			self.my_each {|n| counting += 1 if n == target}
       		end
     	end
     	counting
