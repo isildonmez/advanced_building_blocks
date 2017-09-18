@@ -24,11 +24,7 @@ module Enumerable
 	def my_select
 		if block_given?
 			result = []
-			self.my_each do|n|
-				if yield(n) == true
-					result.push(n)
-				end
-			end
+			self.my_each{|n| result.push(n) if yield(n) == true}
 			result
 		else
 			self.to_enum(:my_select)
@@ -52,12 +48,9 @@ module Enumerable
     		self.my_each {|n| return true if yield(n) == true}
       		return false
     	else
-      		if self.size == 0
-        		return false
-      		else
-      			self.my_each {|n| return true if n != nil || false}
-        		return false
-      		end
+      		return false if self.size == 0
+      		self.my_each {|n| return true if n != nil || false}
+        	return false
     	end
   	end
 #[nil, true, 99].any?   #=> true
@@ -68,12 +61,9 @@ module Enumerable
     		self.my_each {|n| return false if yield(n) == true}
       		return true
     	else
-      		if self.size == 0
-        		return true
-      		else
-      			self.my_each {|n| return false if n != nil || false}
-        		return true
-      		end
+      		return true if self.size == 0
+      		self.my_each {|n| return false if n != nil || false}
+        	return true
     	end
 	end
 # %w{ant bear cat}.none? { |word| word.length == 5 } #=> true
