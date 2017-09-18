@@ -24,7 +24,7 @@ module Enumerable
     def my_select
         if block_given?
             result = []
-            self.my_each{|n| result.push(n) if yield(n) == true}
+            self.my_each{|n| result << n  if yield(n) == true}
             result
         else
             self.to_enum(:my_select)
@@ -85,9 +85,18 @@ module Enumerable
         counting
     end
 
-    def my_map
+    def my_inject(initial_value = 0)
+        acc = initial_value
+        self.my_each{|n| acc = yield(acc, n)}
+        acc
+    end
+
+    def my_map(my_proc = nil)
         result = []
-        if block_given?
+        if my_proc
+            self.my_each{|n| result << my_proc.call(n)}
+            result
+        elsif block_given?
             self.my_each{|n| result << yield(n)}
             result
         else
@@ -95,19 +104,13 @@ module Enumerable
         end
     end
 
-    def my_inject
-    end
 
-    def my_map
-    end
-
-    def my_map
-    end
 end
 
 
-def multiply_els(array)
 
+def multiply_els(array)
+    array.my_inject(1){|acc, n| acc * n}
 end
 
 
