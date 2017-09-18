@@ -78,12 +78,9 @@ module Enumerable
 		if block_given?
 			self.my_each {|n| counting += 1 if yield(n) == true}
     	else
-    		if args.empty?
-      			counting = self.size
-      		else
-      			target = args[0]
-      			self.my_each {|n| counting += 1 if n == target}
-      		end
+    		counting = self.size if args.empty?
+  			target = args[0]
+  			self.my_each {|n| counting += 1 if n == target}
     	end
     	counting
 	end
