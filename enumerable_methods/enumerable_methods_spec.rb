@@ -11,7 +11,7 @@ describe Enumerable do
     # TODO: consider the way(s)
     context "with a given block" do
       it "Calls the given block once for each element in self, returns self" do
-        array.my_each {|num| answer << num + 1}
+        array.my_each { |num| answer << num + 1 }
         expect(answer).to eql([2,3,4,5])
         # It correctly applies block to each element
         # Also I might to check if it correctly traverses each element:
@@ -31,7 +31,7 @@ describe Enumerable do
   describe "#my_each_with_index" do
     # context "with a given block" do
     #   it "calls block with two arguments: the item and its index, for each item." do
-    #     array.my_each_with_index {|num, idx| answer << [num, idx]}
+    #     array.my_each_with_index { |num, idx| answer << [num, idx] }
     #     expect(answer).to eql([[1,0], [2,1], [3,2], [4,3]])
     #     expect { |block|  array.my_each_with_index(&block) }.to yield_successive_args(1...3)
     #   end
@@ -47,7 +47,7 @@ describe Enumerable do
   describe "#my_select" do
     context "with a given block" do
       it "returns an array of each elements which is true for the given block" do
-        answer = array.my_select{|num| num.even?}
+        answer = array.my_select { |num| num.even?}
         expect(answer).to eql([2,4])
       end
     end
@@ -59,18 +59,24 @@ describe Enumerable do
     end
   end
 
-  # describe "#my_all?" do
-  #   context "with a given block" do
-  #     it "" do
-  #       expect(my_()).to eql("")
-  #     end
-  #   end
-  #   context "when no block is given" do
-  #     it "" do
-  #       expect().to eql()
-  #     end
-  #   end
-  # end
+  describe "#my_all?" do
+    context "with a given block" do
+      it "returns true if the block never returns 'false' or 'nil'." do
+        expect(array.my_all? { |num| num < 5}).to eql(true)
+      end
+      it "returns false if the block returns except for true" do
+        expect(array.my_all? { |num| num > 5}).to eql(false)
+      end
+    end
+    context "when no block is given" do
+      it "returns true when none of the collection members are 'false' or 'nil'." do
+        expect(array2.my_all?).to eql(true)
+      end
+      it "returns false when any of the collection members are 'false' or 'nil'." do
+        expect(array3.my_all?).to eql(false)
+      end
+    end
+  end
 
   # describe "#my_any?" do
   #   context "with a given block" do
