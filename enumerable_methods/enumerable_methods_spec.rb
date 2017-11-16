@@ -132,34 +132,11 @@ describe Enumerable do
     end
   end
 
-  # describe "#my_inject" do
-  #   context "" do
-  #     it "" do
-  #       expect(my_()).to eql("")
-  #     end
-  #   end
-  # end
-
-  # describe "#my_map" do
-  #   context "with a given block" do
-  #     it "" do
-  #       expect(my_()).to eql("counts the number of elements yielding a true value")
-  #     end
-  #   end
-  #   context "when no block is given" do
-  #     it "" do
-  #       expect().to eql()
-  #     end
-  #   end
-  # end
-
 end
 
 
-# describe "#multiply_els" do
-#   context "" do
-#       it "" do
-#         expect(my_()).to eql("")
-#       end
-#     end
-# end
+describe "#multiply_els" do
+  it "multiplies all the elements of the array together by using #my_inject" do
+    expect(multiply_els([2,4,5])).to eql(40)
+  end
+end
