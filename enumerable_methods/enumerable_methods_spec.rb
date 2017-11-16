@@ -8,16 +8,15 @@ describe Enumerable do
   let(:answer) {[]}
 
   describe "#my_each" do
-    # TODO: consider the way(s)
     context "with a given block" do
       it "Calls the given block once for each element in self, returns self" do
-        array.my_each { |num| answer << num + 1 }
+        # check if it correctly traverses each element:
+        expect { |block|  array.my_each(&block) }.to yield_successive_args(1,2,3,4)
+        # check if it returns self:
+        expect(array.my_each { |num| answer << num + 1 }).to eql(array)
+        # check if it correctly applies block to each element:
         expect(answer).to eql([2,3,4,5])
-        # It correctly applies block to each element
-        # Also I might to check if it correctly traverses each element:
-        # expect { |block|  array.my_each(&block) }.to yield_successive_args(1,2,3,4)
       end
-      #  but any of them doesn't check what it returns though.
     end
     context "when no block is given" do
       it "returns an Enumerator" do
