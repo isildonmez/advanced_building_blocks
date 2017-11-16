@@ -63,7 +63,7 @@ module Enumerable
       return true
     else
       return true if self.size == 0
-      self.my_each {|n| return false if n != nil || false}
+      self.my_each {|n| return false if n == true}
       return true
     end
   end

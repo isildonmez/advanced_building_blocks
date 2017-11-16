@@ -97,18 +97,25 @@ describe Enumerable do
     end
   end
 
-  # describe "#my_none?" do
-  #   context "with a given block" do
-  #     it "" do
-  #       expect(my_()).to eql("")
-  #     end
-  #   end
-  #   context "when no block is given" do
-  #     it "" do
-  #       expect().to eql()
-  #     end
-  #   end
-  # end
+  describe "#my_none?" do
+    context "with a given block" do
+      it "returns true if the block never returns true for all elements" do
+        expect(array.my_none? { |num| num > 4}).to eql(true)
+      end
+      it "returns false if the block ever returns true" do
+        expect(array.my_none? { |num| num > 3}).to eql(false)
+      end
+    end
+    context "when no block is given" do
+      it "returns true only if none of the collection members is true." do
+        expect(array2.my_none?).to eql(true)
+        # expect(array4.my_none?).to eql(true)
+      end
+      it "returns false if any of the collection members is true." do
+        expect(array3.my_none?).to eql(false)
+      end
+    end
+  end
 
   # describe "#my_count" do
   #   context "with a given block" do
