@@ -8,47 +8,56 @@ describe Enumerable do
   let(:answer) {[]}
 
   describe "#my_each" do
+    # TODO: consider the way(s)
     context "with a given block" do
       it "Calls the given block once for each element in self, returns self" do
         array.my_each {|num| answer << num + 1}
-        expect(answer).to eq([2,3,4,5])
-        # It correctly applies block to each element but doesn't check what it returns though.
+        expect(answer).to eql([2,3,4,5])
+        # It correctly applies block to each element
         # Also I might to check if it correctly traverses each element:
-        # expect { |block|  array.my_each(&block) }.to yield_successive_args(7, 9, 13)
+        # expect { |block|  array.my_each(&block) }.to yield_successive_args(1,2,3,4)
+      end
+      #  but any of them doesn't check what it returns though.
+    end
+    context "when no block is given" do
+      it "returns an Enumerator" do
+        expect(array.my_each).to be_is_a(Enumerator)
+        expect(array.my_each.to_a).to eql(array)
       end
     end
-    # context "when no block is given" do
-    #   it "returns an Enumerator" do
-    #     expect(array.my_each).to eql(array.to_enum(:my_each))
-    #   end
-    # end
   end
 
-  # describe "#my_each_with_index" do
-  #   context "with a given block" do
-  #     it "" do
-  #       expect(my_()).to eql("")
-  #     end
-  #   end
-  #   context "when no block is given" do
-  #     it "" do
-  #       expect().to eql()
-  #     end
-  #   end
-  # end
+  # TODO: when block is given
+  describe "#my_each_with_index" do
+    # context "with a given block" do
+    #   it "calls block with two arguments: the item and its index, for each item." do
+    #     array.my_each_with_index {|num, idx| answer << [num, idx]}
+    #     expect(answer).to eql([[1,0], [2,1], [3,2], [4,3]])
+    #     expect { |block|  array.my_each_with_index(&block) }.to yield_successive_args(1...3)
+    #   end
+    # end
+    context "when no block is given" do
+      it "returns an Enumerator" do
+        expect(array.my_each_with_index).to be_is_a(Enumerator)
+        # expect(array.my_each_with_index.to_a).to eql(array)
+      end
+    end
+  end
 
-  # describe "#my_select" do
-  #   context "with a given block" do
-  #     it "" do
-  #       expect(my_()).to eql("")
-  #     end
-  #   end
-  #   context "when no block is given" do
-  #     it "" do
-  #       expect().to eql()
-  #     end
-  #   end
-  # end
+  describe "#my_select" do
+    context "with a given block" do
+      it "returns an array of each elements which is true for the given block" do
+        answer = array.my_select{|num| num.even?}
+        expect(answer).to eql([2,4])
+      end
+    end
+    context "when no block is given" do
+      it "returns an Enumerator" do
+        expect(array.my_select).to be_is_a(Enumerator)
+        expect(array.my_select.to_a).to eql(array)
+      end
+    end
+  end
 
   # describe "#my_all?" do
   #   context "with a given block" do
