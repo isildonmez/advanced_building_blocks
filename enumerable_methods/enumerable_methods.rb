@@ -37,7 +37,7 @@ module Enumerable
       self.my_each {|n| return false if yield(n) == false}
       return true
     else
-      self.my_each {|n| return false if n == nil || false}
+      self.my_each {|n| return false unless n == true}
       return true
     end
   end
@@ -50,7 +50,7 @@ module Enumerable
       return false
     else
       return false if self.size == 0
-      self.my_each {|n| return true if n != nil || false}
+      self.my_each {|n| return true if n == true}
       return false
     end
   end
