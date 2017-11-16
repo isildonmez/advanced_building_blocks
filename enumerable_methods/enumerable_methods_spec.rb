@@ -15,14 +15,13 @@ describe Enumerable do
         # It correctly applies block to each element but doesn't check what it returns though.
         # Also I might to check if it correctly traverses each element:
         # expect { |block|  array.my_each(&block) }.to yield_successive_args(7, 9, 13)
-
       end
     end
-    context "when no block is given" do
-      it "returns an Enumerator" do
-        expect(array.my_each).to eql(array.to_enum(:my_each))
-      end
-    end
+    # context "when no block is given" do
+    #   it "returns an Enumerator" do
+    #     expect(array.my_each).to eql(array.to_enum(:my_each))
+    #   end
+    # end
   end
 
   # describe "#my_each_with_index" do
