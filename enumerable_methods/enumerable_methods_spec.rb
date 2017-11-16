@@ -116,18 +116,21 @@ describe Enumerable do
     end
   end
 
-  # describe "#my_count" do
-  #   context "with a given block" do
-  #     it "" do
-  #       expect(my_()).to eql("")
-  #     end
-  #   end
-  #   context "when no block is given" do
-  #     it "" do
-  #       expect().to eql()
-  #     end
-  #   end
-  # end
+  describe "#my_count" do
+    context "with a given block" do
+      it "counts the number of elements yielding a true value" do
+        expect(array.my_count{ |num| num % 2 == 0 }).to eql(2)
+      end
+    end
+    context "when no block is given" do
+      it "returns the number of items that is equal to the argument" do
+        expect(array.my_count(2)).to eql(1)
+      end
+      it "returns the number of items unless the argument is given" do
+        expect(array.my_count).to eql(4)
+      end
+    end
+  end
 
   # describe "#my_inject" do
   #   context "" do
@@ -140,7 +143,7 @@ describe Enumerable do
   # describe "#my_map" do
   #   context "with a given block" do
   #     it "" do
-  #       expect(my_()).to eql("")
+  #       expect(my_()).to eql("counts the number of elements yielding a true value")
   #     end
   #   end
   #   context "when no block is given" do
