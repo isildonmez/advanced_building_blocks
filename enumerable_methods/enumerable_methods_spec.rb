@@ -109,7 +109,7 @@ describe Enumerable do
     context "when no block is given" do
       it "returns true only if none of the collection members is true." do
         expect(array2.my_none?).to eql(true)
-        # expect(array4.my_none?).to eql(true)
+        expect(array4.my_none?).to eql(true)
       end
       it "returns false if any of the collection members is true." do
         expect(array3.my_none?).to eql(false)
