@@ -61,7 +61,7 @@ describe Enumerable do
 
   describe "#my_all?" do
     context "with a given block" do
-      it "returns true if the block never returns 'false' or 'nil'." do
+      it "returns true if the block never returns false or nil." do
         expect(array.my_all? { |num| num < 5}).to eql(true)
       end
       it "returns false if the block returns except for true" do
@@ -69,27 +69,33 @@ describe Enumerable do
       end
     end
     context "when no block is given" do
-      it "returns true when none of the collection members are 'false' or 'nil'." do
+      it "returns true when none of the collection members are false or nil." do
         expect(array2.my_all?).to eql(true)
       end
-      it "returns false when any of the collection members are 'false' or 'nil'." do
+      it "returns false when any of the collection members are false or nil." do
         expect(array3.my_all?).to eql(false)
       end
     end
   end
 
-  # describe "#my_any?" do
-  #   context "with a given block" do
-  #     it "" do
-  #       expect(my_()).to eql("")
-  #     end
-  #   end
-  #   context "when no block is given" do
-  #     it "" do
-  #       expect().to eql()
-  #     end
-  #   end
-  # end
+  describe "#my_any?" do
+    context "with a given block" do
+      it "returns true if the block ever returns a value other than false or nil" do
+        expect(array.my_any? { |num| num >= 4 }).to eql(true)
+      end
+    it "returns false if the block never returns true" do
+        expect(array.my_any? { |num| num > 4 }).to eql(false)
+      end
+    end
+    context "when no block is given" do
+      it "return true if at least one of the collection members is not false or nil." do
+        expect(array3.my_any?).to eql(true)
+      end
+      it "return false if at least none of the collection members is true." do
+        expect(array2.my_any?).to eql(false)
+      end
+    end
+  end
 
   # describe "#my_none?" do
   #   context "with a given block" do
