@@ -6,6 +6,7 @@ describe Enumerable do
   let(:array3) {[nil,true,99]}
   let(:array4) {[nil,false]}
   let(:answer) {[]}
+  let(:answer2) {[[1,0], [2,1], [3,2], [4,3]]}
 
   describe "#my_each" do
     context "with a given block" do
@@ -30,13 +31,13 @@ describe Enumerable do
     context "with a given block" do
       it "calls block with two arguments: the item and its index, for each item." do
         array.my_each_with_index { |num, idx| answer << [num, idx] }
-        expect(answer).to eql([[1,0], [2,1], [3,2], [4,3]])
+        expect(answer).to eql(answer2)
       end
     end
     context "when no block is given" do
       it "returns an Enumerator" do
         expect(array.my_each_with_index).to be_is_a(Enumerator)
-        # expect(array.my_each_with_index.to_a).to eql(array)
+        expect(array.my_each_with_index.to_a).to eql(answer2)
       end
     end
   end
