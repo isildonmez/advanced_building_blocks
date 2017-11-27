@@ -13,7 +13,7 @@ module Enumerable
 
   def my_each_with_index
     if block_given?
-      for i  in [0...self.size]
+      for i  in 0...self.size
         yield(self[i], i)
       end
       self

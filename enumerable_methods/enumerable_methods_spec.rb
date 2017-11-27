@@ -26,15 +26,13 @@ describe Enumerable do
     end
   end
 
-  # TODO: when block is given
   describe "#my_each_with_index" do
-    # context "with a given block" do
-    #   it "calls block with two arguments: the item and its index, for each item." do
-    #     array.my_each_with_index { |num, idx| answer << [num, idx] }
-    #     expect(answer).to eql([[1,0], [2,1], [3,2], [4,3]])
-    #     expect { |block|  array.my_each_with_index(&block) }.to yield_successive_args(1...3)
-    #   end
-    # end
+    context "with a given block" do
+      it "calls block with two arguments: the item and its index, for each item." do
+        array.my_each_with_index { |num, idx| answer << [num, idx] }
+        expect(answer).to eql([[1,0], [2,1], [3,2], [4,3]])
+      end
+    end
     context "when no block is given" do
       it "returns an Enumerator" do
         expect(array.my_each_with_index).to be_is_a(Enumerator)
